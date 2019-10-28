@@ -1,21 +1,31 @@
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
-
-function App() {
+import SourceBox from './SourceBox'
+import TargetBox from './TargetBox'
+import Colors from './Colors'
+export default function Container() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <>
+            <div style={{ clear: 'both', margin: '-.5rem' }}>
+                <div style={{ float: 'left' }}>
+                    <SourceBox color={Colors.BLUE}>
+                        <SourceBox color={Colors.YELLOW}>
+                            <SourceBox color={Colors.YELLOW} />
+                            <SourceBox color={Colors.BLUE} />
+                        </SourceBox>
+                        <SourceBox color={Colors.BLUE}>
+                            <SourceBox color={Colors.YELLOW} />
+                        </SourceBox>
+                    </SourceBox>
+                </div>
+
+                <div style={{ float: 'left', marginLeft: '5rem', marginTop: '.5rem' }}>
+                    <TargetBox>
+                        <TargetBox>
+                            <TargetBox></TargetBox>
+                        </TargetBox>
+                    </TargetBox>
+                </div>
+            </div>
+        </>
     )
 }
-
-export default App
