@@ -1,15 +1,15 @@
 import React, { useState, useCallback } from 'react'
 import { useDrop } from 'react-dnd'
-import FormItem from './FormItem'
 import Colors from './Colors'
 const style = {
     border: '1px solid gray',
-    minHeight: '15rem',
-    width: '40rem',
+    minHeight: '2rem',
+    width: '100%',
     padding: '2rem',
     boxSizing: 'border-box',
     textAlign: 'center',
 }
+
 const TargetBox = ({ onDrop, lastDroppedColor, children }) => {
     const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
     const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
@@ -19,7 +19,7 @@ const TargetBox = ({ onDrop, lastDroppedColor, children }) => {
             if (didDrop) {
                 return
             }
-            onDrop({})
+            onDrop(item.type)
             setHasDroppedOnChild(true)
         },
         collect: monitor => ({
@@ -41,25 +41,27 @@ const TargetBox = ({ onDrop, lastDroppedColor, children }) => {
         default:
             break
     }
-    console.log(lastDroppedColor)
     return (
         <div ref={drop} style={{ ...style, backgroundColor, opacity }}>
-            <div>
-                {lastDroppedColor.map(item => {
-                    if (item) {
-                        return <FormItem item={item}></FormItem>
-                    } else {
-                        return item
-                    }
-                })}
-            </div>
+            <div>{lastDroppedColor.type}</div>
         </div>
     )
 }
-
 const StatefulTargetBox = props => {
-    const [lastDroppedColor, setLastDroppedColor] = useState([])
-    const handleDrop = useCallback(color => setLastDroppedColor(lastDroppedColor.concat(color)), [lastDroppedColor])
-    return <TargetBox {...props} lastDroppedColor={lastDroppedColor} onDrop={handleDrop}></TargetBox>
+    const [lastDroppedColor, setLastDroppedColor] = useState()
+    const handleDrop = useCallback(
+        color => {
+            props.item.type = color
+            setLastDroppedColor(color)
+        },
+        [props.item.type],
+    )
+
+    return (
+        <div style={{ display: 'flex' }}>
+            <input onChange={e => (props.item.label = e.target.value)}></input>
+            <TargetBox {...props} lastDroppedColor={props.item} onDrop={handleDrop}></TargetBox>
+        </div>
+    )
 }
 export default StatefulTargetBox

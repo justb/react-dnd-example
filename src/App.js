@@ -7,6 +7,7 @@ export default function Container() {
         <>
             <div style={{ clear: 'both', margin: '-.5rem' }}>
                 <div style={{ float: 'left' }}>
+                    <button>导出</button>
                     <SourceBox color={Colors.BLUE}>
                         <SourceBox color={Colors.YELLOW}>
                             <SourceBox color={Colors.YELLOW} />
@@ -19,11 +20,7 @@ export default function Container() {
                 </div>
 
                 <div style={{ float: 'left', marginLeft: '5rem', marginTop: '.5rem' }}>
-                    <TargetBox>
-                        <TargetBox>
-                            <TargetBox></TargetBox>
-                        </TargetBox>
-                    </TargetBox>
+                    <TargetBox></TargetBox>
                 </div>
             </div>
         </>
