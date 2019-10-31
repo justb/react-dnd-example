@@ -2,6 +2,7 @@ import React from 'react'
 import SourceBox from './SourceBox'
 import TargetBox from './TargetBox'
 import Colors from './Colors'
+import './App.scss'
 export default function Container() {
     return (
         <>
